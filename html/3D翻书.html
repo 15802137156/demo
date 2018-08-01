@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>3D翻书</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+
+    .container {
+      overflow: hidden;
+      perspective: 800px;
+      perspective-origin: 50% 50%;
+    }
+
+    .page-list {
+      position: relative;
+      width: 200px;
+      height: 200px;
+      margin: 100px auto 10px;
+      transform-style: preserve-3d;
+    }
+
+    .page {
+      width: 200px;
+      height: 200px;
+      text-align: center;
+      line-height: 200px;
+      background: #000;
+      color: #fff;
+      font-size: 100px;
+      position: absolute;
+      left: 0;
+      top: 0;
+      transition: 0.5s linear;
+      transform-origin: bottom;
+      transform: rotateX(90deg)
+    }
+
+    #page1 {
+      transform: rotateY(0deg);
+    }
+
+    .bottom {
+      text-align: center;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="page-list">
+      <div class="page" id="page1">1</div>
+      <div class="page" id="page2">2</div>
+      <div class="page" id="page3">3</div>
+      <div class="page" id="page4">4</div>
+      <div class="page" id="page5">5</div>
+      <div class="page" id="page6">6</div>
+    </div>
+  </div>
+  <div class="bottom">
+    <span id="prev">prev</span>
+    <span id="next">next</span>
+  </div>
+
+  <script>
+    var next = document.getElementById('next');
+    var prev = document.getElementById('prev');
+    var currIndex = 1;
+    next.onclick = function () {
+      if (currIndex === 6) return;
+      document.getElementById('page' + currIndex).style.transform = 'rotateX(-180deg)'
+      currIndex++;
+      document.getElementById('page' + currIndex).style.transform = 'rotateX(0deg)'
+    }
+    prev.onclick = function () {
+      if (currIndex === 1) return;
+      document.getElementById('page' + currIndex).style.transform = 'rotateX(90deg)'
+      currIndex--;
+      document.getElementById('page' + currIndex).style.transform = 'rotateX(0deg)'
+    }
+  </script>
+
+</body>
+
+</html>
